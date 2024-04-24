@@ -83,3 +83,26 @@ function DisplayUser2(response)
     }
 }
 
+const btn = document.getElementById('fight');
+btn.addEventListener('click',()=>{
+    displayDetailsOfPokemon();
+    setTimeout(()=>{
+    let card1 = document.getElementById("card1");
+    let card2 = document.getElementById('card2');
+    let src1 = card1.querySelector('#experience').textContent;
+    let src2 = card2.querySelector('#experience').textContent;
+    scr1 = Number(src1);
+    scr2 = Number(src2);
+    console.log(src1,src2);
+    if(src1>src2){
+        score1 = score1 + 1;
+        document.querySelector('#p1_score').textContent = `Score : ${score1}`;
+    }
+    else if(src2>src1)
+    {
+        score2 = score2 + 1;
+        document.querySelector('#p2_score').textContent = `Score : ${score2}`;
+
+    }
+},1000);
+});
