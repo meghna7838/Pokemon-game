@@ -1,6 +1,8 @@
 let p1_name = "John";
 let p2_name = "Alice";
-function displayDetails()
+let score1 = 0;
+let score2 = 0;
+function displayDetailsOfPokemon()
 {
    fetch('https://pokeapi.co/api/v2/pokemon/')
    .then((response)=>{
@@ -32,12 +34,12 @@ function displayDetails()
    })
 }
 
-displayDetails();
+
 function DisplayUser1(response)
 {
     console.log(response);
     document.getElementById("p1_name").textContent=p1_name;
-    document.getElementById("p1_score").textContent= `Score`
+    document.getElementById("p1_score").textContent= `Score: ${score1}`;
     const card1 = document.getElementById("card1");
     card1.querySelector("#name").textContent = response.name;
     const imgc1 = document.createElement("img");
@@ -57,5 +59,27 @@ function DisplayUser1(response)
     const exp = card1.querySelector('#experience')
     exp.textContent = response.base_experience;
                 
-
 }
+
+function DisplayUser2(response)
+{
+    document.getElementById("p2_name").textContent = p2_name;
+    document.getElementById("p2_score").textContent = `Score: ${score2}`;
+    const card2 = document.getElementById("card2");
+    card2.querySelector("#name").textContent = response.name;
+    const imgc2 = document.createElement('img');
+    imgc2.setAttribute('src',response.sprites.other.dream_world.front_default);
+    imgc2.style.height = '300px';
+    imgc2.style.width = '300px';
+    card2.querySelector('#img').innerHTML = '';
+    card2.querySelector('#img').append(imgc2);
+    card2.querySelector('#experience').textContent = response.base_experience;
+    const lst = card2.querySelector('#abilities');
+    const abilities = response.abilities;
+    for(let i of abilities){
+        const li = document.createElement('li');
+        li.textContent = i.ability.name;
+        lst.append(li);
+    }
+}
+
