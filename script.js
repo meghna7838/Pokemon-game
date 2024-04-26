@@ -2,37 +2,26 @@ let p1_name = "John";
 let p2_name = "Alice";
 let score1 = 0;
 let score2 = 0;
-function displayDetailsOfPokemon()
+
+async function getPokemon(id)
 {
-   fetch('https://pokeapi.co/api/v2/pokemon/')
-   .then((response)=>{
-    return response.json();
-   })
-   .then((response)=>{
-    const r = Math.floor(((Math.random())*20));
-    return fetch(response.results[r].url);
-   })
-   .then((response)=>{
-    return response.json();
-   })
-   .then((response)=>{
-    DisplayUser1(response);
-    return fetch('https://pokeapi.co/api/v2/pokemon/');
-   })
-   .then((response)=>{
-    return response.json();
-   })
-   .then((response)=>{
-    const r = Math.floor(((Math.random())*20));
-    return fetch(response.results[r].url);
-   })
-   .then((response)=>{
-    return response.json();
-   })
-   .then((response)=>{
-    DisplayUser2(response);
-   })
+    //console.log(id);
+    const response = await fetch(id)
+    const pokemon = await response.json();
+    return pokemon;
 }
+async function displayDetailsOfPokemon()
+{
+   const response = await getPokemon('https://pokeapi.co/api/v2/pokemon/');
+    const r = Math.floor(((Math.random())*20));
+    const getIt= await getPokemon(response.results[r].url);
+    DisplayUser1(getIt);
+    const res = await getPokemon('https://pokeapi.co/api/v2/pokemon/');
+    const r2 = Math.floor(((Math.random())*20));
+    const getIt2 = await getPokemon(response.results[r2].url);
+    DisplayUser2(getIt2);
+   
+   }
 
 
 function DisplayUser1(response)
